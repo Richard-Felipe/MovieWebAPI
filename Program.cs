@@ -7,9 +7,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddNewtonsoftJson();
 builder.Services.AddDbContext<MovieContext>
-    (opts => opts.UseSqlServer(builder.Configuration.GetConnectionString("MovieConnection")));
+    (opts => opts.UseLazyLoadingProxies().UseSqlServer(builder.Configuration.GetConnectionString("MovieConnection")));
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 
